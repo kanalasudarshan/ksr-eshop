@@ -19,9 +19,21 @@
         <property name="basename" value="classpath:messages" />
         <property name="defaultEncoding" value="UTF-8" />
     </bean>
-    <bean id="propertyConfigurer"   class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" p:location="/WEB-INF/jdbc.properties" />
+    <!-- 
+    <bean id="propertyConfigurer"   class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer" >
+    	<property name="locations">
+    		<list>	
+    			<value>classpath:properties/mail.properties</value>
+    			<value>classpath:properties/mail.properties</value>    			
+    		</list>
+    	</property>
+    	<property name="ignoreUnresolvablePlaceholders" value="true"/>
+    </bean>
 
-
+ 	-->
+ 	<context:property-placeholder location="classpath:properties/mail.properties" order="1" ignore-unresolvable="true"/>
+ 	<context:property-placeholder location="classpath:properties/jdbc.properties" order="2" ignore-unresolvable="true"/>
+ 	
    <bean id="dataSource"   class="org.springframework.jdbc.datasource.DriverManagerDataSource"
         p:driverClassName="${jdbc.driverClassName}"
         p:url="${jdbc.databaseurl}" 
@@ -30,13 +42,20 @@
     </bean>
     <bean id="sessionFactory"  class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"></property>
+        <!--
         <property name="configLocation">
         	<value>classpath:hibernate.cfg.xml</value>
-        </property>        
+        </property>
+          -->        
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">${jdbc.dialect}</prop>
                 <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.connection.driver_class">${jdbc.driverClassName}</prop>
+                <prop key="hibernate.connection.url">${jdbc.databaseurl}</prop>                
+            	<prop key="hibernate.connection.username">${jdbc.username}</prop>
+            	<prop key="hibernate.connection.password">${jdbc.password}</prop>
+            	<prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop>
             </props>
         </property>
          <property name="annotatedClasses">
@@ -46,5 +65,22 @@
       </property>
     </bean>
 
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+	    <!-- SMTP settings -->
+	    <property name="host" value="${mail.smtp.host}" />
+	    <property name="port" value="${mail.port}" />
+	    <property name="username" value="${mail.username}" />
+	    <property name="password" value="${mail.password}" />
+	 
+	    <property name="javaMailProperties">
+	        <!-- additional properties specific to JavaMail -->
+	        <props>
+	            <prop key="mail.transport.protocol">${mail.protocol}</prop>
+	            <prop key="mail.smtp.auth">true</prop>
+	            <prop key="mail.smtp.starttls.enable">true</prop>
+	        </props>
+	    </property>
+	</bean>
  
 </beans>

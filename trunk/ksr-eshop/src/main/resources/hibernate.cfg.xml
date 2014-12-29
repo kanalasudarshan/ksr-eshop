@@ -9,9 +9,9 @@
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/ebuy</property>
-        <property name="connection.username">skanala</property>
-        <property name="connection.password">skanala</property>
+        <property name="connection.url">jdbc:mysql://10.10.2.191:3306/csuitedev?autoReconnect=true</property>
+        <property name="connection.username">csuite</property>
+        <property name="connection.password">maha1234</property>
 
         <!-- JDBC connection pool (use the built-in) -->
         <property name="connection.pool_size">1</property>
