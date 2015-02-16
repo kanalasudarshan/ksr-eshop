@@ -7,8 +7,15 @@
   <name>eshop</name>
   
   
-  <dependencies>
-  <dependency>
+<properties>
+    <org.springframework.version>4.0.5.RELEASE</org.springframework.version>
+    <org.springframework.security.version>3.2.5.RELEASE</org.springframework.security.version>
+</properties>
+  
+  
+  
+ <dependencies>
+  	<dependency>
 	  <groupId>org.springframework</groupId>
 	  <artifactId>spring-core</artifactId>
 	  <version>${org.springframework.version}</version>
@@ -148,7 +155,27 @@
 	  <version>${org.springframework.version}</version>
 	  <scope>test</scope>
 	</dependency>
-	
+	<!--
+	    Spring Security
+	-->
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-web</artifactId>
+        <version>${org.springframework.security.version}</version>      
+    </dependency>
+    
+    <dependency>
+		<groupId>org.springframework.security</groupId>
+		<artifactId>spring-security-config</artifactId>
+		 <version>${org.springframework.security.version}</version>      
+	</dependency>
+    
+	<dependency>
+	 	<groupId>org.springframework.security</groupId>
+	 	<artifactId>spring-security-taglibs</artifactId>
+	 	 <version>${org.springframework.security.version}</version>      
+	</dependency>
+		
 	<dependency>
 	   <groupId>org.hibernate</groupId>
 	   <artifactId>hibernate-core</artifactId>
@@ -195,14 +222,10 @@
 		<groupId>javax.mail</groupId>
 		<artifactId>mail</artifactId>
 		<version>1.4</version>
-	</dependency>
-    
+	</dependency>   
     
 	
 </dependencies>
-<properties>
-    <org.springframework.version>4.0.5.RELEASE</org.springframework.version>
-</properties>
 
 	
 <build>  
