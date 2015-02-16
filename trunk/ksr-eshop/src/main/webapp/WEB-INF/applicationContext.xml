@@ -82,5 +82,14 @@
 	        </props>
 	    </property>
 	</bean>
+	
+ 	<bean id="userAuthenticationService" class="com.eshop.admin.service.UserAuthenticationService">		
+ 		<property name="userDao" ref="userDao" />
+	</bean>
+	
+	<bean id="userDao" class="com.eshop.admin.dao.UserDAOImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
  
+	
 </beans>
